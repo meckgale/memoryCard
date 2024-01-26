@@ -10,6 +10,5 @@ export default async function pokemonList() {
     pokemon.image = second;
     list.push(pokemon);
   }
-  console.log(list);
   return list;
 }

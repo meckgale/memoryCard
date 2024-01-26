@@ -37,6 +37,10 @@
   width: 50%;
 }
 
+.card:hover {
+  background-color: darkgray;
+}
+
 .image {
   height: 50%;
 }
