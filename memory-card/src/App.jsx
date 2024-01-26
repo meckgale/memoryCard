@@ -1,6 +1,10 @@
 import { useState } from "react";
 import "./App.css";
 import useData from "./useData";
+import getData from "./getData";
+import getImage from "./getImage";
+import getName from "./getName";
+import pokemonList from "./pokemonList";
 
 export default function App() {
   // const { pokemonObj } = useData(1);
@@ -43,3 +47,8 @@ function Card({ id }) {
     </div>
   );
 }
+
+getData();
+getImage(0);
+getName(0);
+pokemonList();
