@@ -7,17 +7,13 @@ const objList = await pokemonList();
 
 export default function App() {
   const [count, setCount] = useState(0);
-  const [clicked, setClicked] = useState([]);
-  const [selectedCard, setSelectedCard] = useState(null);
+  const [clickedCards, setClickedCards] = useState([]);
 
-  function handleCard() {
+  function handleCard(obj) {
+    if (clickedCards.includes(obj.id)) return;
     setCount((c) => c + 1);
-    setClicked((cards) => [...cards, clicked]);
-    console.log(clicked);
-  }
-
-  function handleClickedCard() {
-    setClicked((cards) => [...cards, clicked]);
+    setClickedCards(() => [...clickedCards, obj.id]);
+    console.log(clickedCards);
   }
 
   return (
@@ -29,26 +25,32 @@ export default function App() {
           <h3>{count}</h3>
         </div>
       </header>
-      <CardList objList={objList} onHandle={handleCard} />
+      <CardList onHandle={handleCard} objList={objList} />
     </div>
   );
 }
 
-function CardList({ onHandle }) {
+function CardList({ onHandle, objList }) {
   return (
     <div className="card-list">
-      {objList.map((obj, i) => (
-        <Card obj={obj} key={i} onHandle={onHandle} />
+      {objList.map((obj) => (
+        <Card
+          name={obj.name}
+          image={obj.image}
+          key={obj.id}
+          onHandle={onHandle}
+          obj={obj}
+        />
       ))}
     </div>
   );
 }
 
-function Card({ obj, onHandle }) {
+function Card({ name, image, onHandle, obj }) {
   return (
-    <div className="card" onClick={onHandle}>
-      <img className="image" src={obj.image} alt={`${obj.name} poster`} />
-      <h3>{obj.name.toUpperCase()}</h3>
+    <div className="card" onClick={() => onHandle(obj)}>
+      <img className="image" src={image} alt={`${name} poster`} />
+      <h3>{name.toUpperCase()}</h3>
     </div>
   );
 }
